@@ -55,6 +55,17 @@ namespace CursoTest
                 Times.Once());
         }
         [Fact]
+        public async Task Post_Categoria()
+        {
+            var service = new CategoriasController(_mockContext.Object);
+            await service.PostCategoria(_categoria);
+
+            _mockSet.Verify(x => x.Add(_categoria), Times.Once);
+            _mockContext.Verify(m => m.SaveChangesAsync(It.IsAny<CancellationToken>()),
+                Times.Once());
+        }
+
+        [Fact]
         public async Task Delete_Categoria()
         {
             var service = new CategoriasController(_mockContext.Object);
